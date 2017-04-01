@@ -50,40 +50,6 @@ QT_BEGIN_NAMESPACE
 
 QT_MODULE(Gui)
 
-class QX11EmbedWidgetPrivate;
-class Q_GUI_EXPORT QX11EmbedWidget : public QWidget
-{
-    Q_OBJECT
-public:
-    QX11EmbedWidget(QWidget *parent = 0);
-    ~QX11EmbedWidget();
-
-    void embedInto(WId id);
-    WId containerWinId() const;
-
-    enum Error {
-	Unknown,
-	Internal,
-	InvalidWindowID
-    };
-    Error error() const;
-
-Q_SIGNALS:
-    void embedded();
-    void containerClosed();
-    void error(QX11EmbedWidget::Error error);
-
-protected:
-    bool x11Event(XEvent *);
-    bool eventFilter(QObject *, QEvent *);
-    bool event(QEvent *);
-    void resizeEvent(QResizeEvent *);
-
-private:
-    Q_DECLARE_PRIVATE(QX11EmbedWidget)
-    Q_DISABLE_COPY(QX11EmbedWidget)
-};
-
 class QX11EmbedContainerPrivate;
 class Q_GUI_EXPORT QX11EmbedContainer : public QWidget
 {
