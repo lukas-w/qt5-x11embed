@@ -26,12 +26,9 @@
 #include "X11EmbedContainer.h"
 
 #include <QAbstractNativeEventFilter>
-#include <qapplication.h>
+#include <qcoreapplication.h>
 #include <qevent.h>
 #include <qpainter.h>
-#include <qlayout.h>
-#include <qstyle.h>
-#include <qstyleoption.h>
 #include <qelapsedtimer.h>
 #include <qpointer.h>
 #include <qdebug.h>

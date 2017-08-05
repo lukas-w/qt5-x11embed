@@ -51,14 +51,14 @@ public:
     QSize minimumSizeHint() const;
 
     enum Error {
-	Unknown,
-	Internal,
-	InvalidWindowID
+    Unknown,
+    Internal,
+    InvalidWindowID
     };
     Error error() const;
 
 public:
-	bool nativeEventFilter(const QByteArray &eventType, void *message, long *result);
+    bool nativeEventFilter(const QByteArray &eventType, void *message, long *result);
 
 Q_SIGNALS:
     void clientIsEmbedded();
@@ -66,8 +66,8 @@ Q_SIGNALS:
     void error(QX11EmbedContainer::Error);
 
 protected:
-	bool eventFilter(QObject *, QEvent *) override;
-	void paintEvent(QPaintEvent *e) override;
+    bool eventFilter(QObject *, QEvent *) override;
+    void paintEvent(QPaintEvent *e) override;
     void resizeEvent(QResizeEvent *);
     bool event(QEvent *);
 
