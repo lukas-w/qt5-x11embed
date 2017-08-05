@@ -69,6 +69,98 @@
 #include <qdebug.h>
 #endif
 
+
+/*!
+    \class QX11EmbedContainer
+    \ingroup advanced
+
+    \brief The QX11EmbedContainer class provides an XEmbed container
+    widget.
+
+    XEmbed is an X11 protocol that supports the embedding of a widget
+    from one application into another application.
+
+    An XEmbed \e container is the graphical location that embeds an
+    external \e {client widget}. A client widget is a window that is
+    embedded into a container.
+
+    When a widget has been embedded and the container receives tab
+    focus, focus is passed on to the widget. When the widget reaches
+    the end of its focus chain, focus is passed back to the
+    container. Window activation, accelerator support, modality and
+    drag and drop (XDND) are also handled.
+
+    QX11EmbedContainer is commonly used for writing panels or
+    toolbars that hold applets, or for \e swallowing X11
+    applications. When writing a panel application, one container
+    widget is created on the toolbar, and it can then either swallow
+    another widget using embed(), or allow an XEmbed widget to be
+    embedded into itself. The container's X11 window ID, which is
+    retrieved with winId(), must then be known to the client widget.
+    After embedding, the client's window ID can be retrieved with
+    clientWinId().
+
+    In the following example, a container widget is created as the
+    main widget. It then invokes an application called "playmovie",
+    passing its window ID as a command line argument. The "playmovie"
+    program is an XEmbed client widget. The widget embeds itself into
+    the container using the container's window ID.
+
+    \snippet doc/src/snippets/qx11embedcontainer/main.cpp 0
+
+    When the client widget is embedded, the container emits the
+    signal clientIsEmbedded(). The signal clientClosed() is emitted
+    when a widget is closed.
+
+    It is possible for QX11EmbedContainer to embed XEmbed widgets
+    from toolkits other than Qt, such as GTK+. Arbitrary (non-XEmbed)
+    X11 widgets can also be embedded, but the XEmbed-specific
+    features such as window activation and focus handling are then
+    lost.
+
+    The GTK+ equivalent of QX11EmbedContainer is GtkSocket. The
+    corresponding KDE 3 widget is called QXEmbed.
+*/
+
+/*! \fn void QX11EmbedContainer::clientIsEmbedded()
+
+    This signal is emitted by the container when a client widget has
+    been embedded.
+*/
+
+/*! \fn void QX11EmbedContainer::clientClosed()
+
+    This signal is emitted by the container when the client widget
+    closes.
+*/
+
+/*!
+    \fn QX11EmbedContainer::Error QX11EmbedContainer::error() const
+
+    Returns the last error that occurred.
+*/
+
+/*! \fn void QX11EmbedContainer::error(QX11EmbedContainer::Error error)
+
+    This signal is emitted if an error occurred when embedding or
+    communicating with a client. The specified \a error describes the
+    problem that occurred.
+
+    \sa QX11EmbedContainer::Error
+*/
+
+/*!
+    \enum QX11EmbedContainer::Error
+
+    \value Unknown An unrecognized error occurred.
+
+    \value InvalidWindowID The X11 window ID of the container was
+        invalid. This error is usually triggered by passing an invalid
+        window ID to embed().
+
+    \omitvalue Internal
+*/
+
 #undef KeyPress
 #undef KeyRelease
 #undef FocusIn
