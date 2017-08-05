@@ -39,16 +39,16 @@
 **
 ****************************************************************************/
 
-#ifndef QX11EMBED_X11_H
-#define QX11EMBED_X11_H
+#ifndef X11EMBEDCONTAINER_H
+#define X11EMBEDCONTAINER_H
 
-#include <QtGui/qwidget.h>
+#include <QtGlobal>
 
-QT_BEGIN_HEADER
+#if QT_VERSION < 0x050000
+#include <QX11EmbedContainer>
+#else
 
-QT_BEGIN_NAMESPACE
-
-QT_MODULE(Gui)
+#include <QtWidgets/QWidget>
 
 class QX11EmbedContainerPrivate;
 class Q_GUI_EXPORT QX11EmbedContainer : public QWidget
@@ -78,7 +78,8 @@ Q_SIGNALS:
     void error(QX11EmbedContainer::Error);
 
 protected:
-    bool x11Event(XEvent *);
+    //bool x11Event(XEvent *);
+    bool nativeEvent(const QByteArray &eventType, void *message, long *result);
     bool eventFilter(QObject *, QEvent *);
     void paintEvent(QPaintEvent *e);
     void resizeEvent(QResizeEvent *);
@@ -89,10 +90,9 @@ protected:
 private:
     Q_DECLARE_PRIVATE(QX11EmbedContainer)
     Q_DISABLE_COPY(QX11EmbedContainer)
+    bool x11Event(void *e, long *result);
 };
 
-QT_END_NAMESPACE
+#endif // X11EMBEDCONTAINER_H
 
-QT_END_HEADER
-
-#endif // QX11EMBED_X11_H
+#endif
