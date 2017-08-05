@@ -319,12 +319,6 @@ static xcb_timestamp_t x11Time()
     return QX11Info::getTimestamp();
 }
 
-// Gives the version and flags of the supported XEmbed protocol.
-static unsigned int XEmbedVersion()
-{
-    return 0;
-}
-
 
 // Sends an XEmbed message.
 static void sendXEmbedMessage(WId window, long message,
@@ -1001,7 +995,7 @@ void QX11EmbedContainerPrivate::acceptClient(WId window)
     //TODO
     //extraData()->xDndProxy = client;
 
-    unsigned int version = XEmbedVersion();
+    unsigned int version = XEMBED_VERSION;
     unsigned int clientversion = 0;
 
     // Add this client to our saveset, so if we crash, the client window
@@ -1090,7 +1084,6 @@ void QX11EmbedContainerPrivate::acceptClient(WId window)
 */
 void QX11EmbedContainerPrivate::moveInputToProxy()
 {
-    Q_Q(QX11EmbedContainer);
     // Following Owen Taylor's advice from the XEmbed specification to
     // always use CurrentTime when no explicit user action is involved.
     XSetInputFocus(QX11Info::display(), focusProxy->internalWinId(), XRevertToParent, CurrentTime);

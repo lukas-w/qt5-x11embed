@@ -48,7 +48,7 @@ public:
 
     WId clientWinId() const;
 
-    QSize minimumSizeHint() const;
+    QSize minimumSizeHint() const override;
 
     enum Error {
     Unknown,
@@ -58,7 +58,7 @@ public:
     Error error() const;
 
 public:
-    bool nativeEventFilter(const QByteArray &eventType, void *message, long *result);
+    bool nativeEventFilter(const QByteArray &eventType, void *message, long *result) override;
 
 Q_SIGNALS:
     void clientIsEmbedded();
@@ -68,8 +68,8 @@ Q_SIGNALS:
 protected:
     bool eventFilter(QObject *, QEvent *) override;
     void paintEvent(QPaintEvent *e) override;
-    void resizeEvent(QResizeEvent *);
-    bool event(QEvent *);
+    void resizeEvent(QResizeEvent *) override;
+    bool event(QEvent *) override;
 
 private:
     Q_DECLARE_PRIVATE(QX11EmbedContainer)
