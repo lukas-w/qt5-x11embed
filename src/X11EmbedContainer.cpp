@@ -919,8 +919,6 @@ bool QX11EmbedContainer::x11Event(void *message, long*)
 		}
 		break;
 	}
-	case XCB_CONFIGURE_NOTIFY:
-		return true;
 	default:
 		break;
 	}
