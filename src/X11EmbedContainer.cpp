@@ -419,7 +419,7 @@ QX11EmbedContainer *QX11EmbedContainerPrivate::activeContainer = 0;
 	Creates a QX11EmbedContainer object with the given \a parent.
 */
 QX11EmbedContainer::QX11EmbedContainer(QWidget *parent)
-	: QWidget(*new QX11EmbedContainerPrivate, parent, 0)
+	: QWidget(*new QX11EmbedContainerPrivate, parent, Qt::WindowFlags{})
 {
 	initAtoms();
 	Q_D(QX11EmbedContainer);
